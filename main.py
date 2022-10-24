@@ -1,7 +1,8 @@
 from PIL import Image
 
+OUTPUT_SIZE = (64,64)
 FILENAME = "clock.gif"
-output_size = (50,50)
+MONOCHROME = False
 
 def open_gif():
 	gif = Image.open(FILENAME)
@@ -12,14 +13,19 @@ def open_gif():
 
 gif = open_gif()
 
-output = Image.new("RGB", (output_size[0] * gif.n_frames, output_size[1]))
+if MONOCHROME:
+	output = Image.new("1", (OUTPUT_SIZE[0] * gif.n_frames, OUTPUT_SIZE[1]), 0)
+else:
+	output = Image.new("RGB", (OUTPUT_SIZE[0] * gif.n_frames, OUTPUT_SIZE[1]))
+
 output_filename = f"icon_{gif.n_frames}_frames.bmp"
 
 for frame in range(0,gif.n_frames):
 	gif.seek(frame)
-	extracted_frame = gif.resize(output_size)
-	position = (output_size[0]*frame, 0)
+	extracted_frame = gif.resize(OUTPUT_SIZE)
+	position = (OUTPUT_SIZE[0]*frame, 0)
 	output.paste(extracted_frame, position)
 
-output = output.convert("P", colors = 8)
+if not MONOCHROME:
+	output = output.convert("P", colors = 8)
 output.save(output_filename)

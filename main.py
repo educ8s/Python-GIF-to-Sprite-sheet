@@ -1,8 +1,8 @@
 from PIL import Image
 
-OUTPUT_SIZE = (64,64)
-FILENAME = "clock.gif"
-MONOCHROME = False
+OUTPUT_SIZE = (64,64) # The output size of each frame (or tile or Sprite) of the animation
+FILENAME = "clock.gif" # The file to convert
+MONOCHROME = False # Do you want the output file to be b/w?
 
 def open_gif():
 	gif = Image.open(FILENAME)

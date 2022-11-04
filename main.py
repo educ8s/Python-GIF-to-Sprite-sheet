@@ -4,14 +4,9 @@ OUTPUT_SIZE = (64,64) # The output size of each frame (or tile or Sprite) of the
 FILENAME = "clock.gif" # The file to convert
 MONOCHROME = False # Do you want the output file to be b/w?
 
-def open_gif():
-	gif = Image.open(FILENAME)
-	print(f"Image Format: {gif.format_description}")
-	print(f"Image Size: {gif.size}")
-	print(f"Frames: {gif.n_frames}")
-	return gif
-
-gif = open_gif()
+gif = Image.open(FILENAME)
+print(f"Size: {gif.size}")
+print(f"Frames: {gif.n_frames}")
 
 if MONOCHROME:
 	output = Image.new("1", (OUTPUT_SIZE[0] * gif.n_frames, OUTPUT_SIZE[1]), 0)
